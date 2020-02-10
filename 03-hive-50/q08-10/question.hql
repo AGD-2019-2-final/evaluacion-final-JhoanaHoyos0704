@@ -41,4 +41,11 @@ LOAD DATA LOCAL INPATH 'tbl1.csv' INTO TABLE tbl1;
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
 
+INSERT OVERWRITE LOCAL DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+
+
+SELECT CONCAT(c2, ',', (SUM((CASE WHEN c6['aa'] IS NULL THEN 0 ELSE c6['aa'] END)+(CASE WHEN c6['bb'] IS NULL THEN 0 ELSE c6['bb'] END)+(CASE WHEN c6['cc'] IS NULL THEN 0 ELSE c6['cc'] END)+(CASE WHEN c6['dd'] IS NULL THEN 0 ELSE c6['dd'] END)))) FROM tbl0 GROUP BY c2;
+
 

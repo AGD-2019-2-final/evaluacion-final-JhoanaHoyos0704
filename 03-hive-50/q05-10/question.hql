@@ -40,3 +40,24 @@ LOAD DATA LOCAL INPATH 'tbl1.csv' INTO TABLE tbl1;
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
 
+DROP TABLE IF EXISTS unionTable;
+CREATE TABLE unionTable 
+AS 
+    SELECT c4,c5[0] AS c5
+    FROM tbl0;
+
+Insert into unionTable (SELECT c4,c5[1] FROM tbl0);
+
+Insert into unionTable (SELECT c4,c5[2] FROM tbl0);
+
+Insert into unionTable (SELECT c4,c5[3] FROM tbl0);
+
+Insert into unionTable (SELECT c4,c5[4] FROM tbl0);
+
+
+INSERT OVERWRITE LOCAL DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+
+
+SELECT Year(Date(c4,'yyyy-MM-dd')), c5, COUNT(c5) FROM unionTable WHERE c5 IS NOT NULL GROUP BY Year(Date(c4,'yyyy-MM-dd')), c5;
