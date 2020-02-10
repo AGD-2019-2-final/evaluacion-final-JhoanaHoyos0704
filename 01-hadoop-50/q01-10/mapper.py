@@ -20,6 +20,7 @@ if __name__ == "__main__":
         
         line = line.strip()
         splits = line.split(',')
+        credito = splits[2]
         
         
         ##
