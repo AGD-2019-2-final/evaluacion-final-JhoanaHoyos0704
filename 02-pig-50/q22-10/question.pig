@@ -29,8 +29,12 @@ u = LOAD 'data.csv' USING PigStorage(',')
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
 
-y = FILTER u BY $4 MATCHES 'green';
-t = FOREACH y GENERATE $1,$4;
-DUMP t;
-STORE t INTO 'output' USING PigStorage(',');
-fs -copyToLocal output output;
+
+R1 = FILTER u BY $4 MATCHES 'green';
+R2 = FOREACH R1 GENERATE $1,$4;
+DUMP R2;
+
+
+STORE R2 INTO 'output' USING PigStorage(',');
+
+fs -copyToLocal output output

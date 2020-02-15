@@ -26,7 +26,7 @@ INSERT OVERWRITE LOCAL DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
 
+SELECT ident, fecha, num FROM docs ORDER BY ident, num, fecha;
 
-SELECT ident, fecha, num FROM docs ORDER BY ident, num;
 
 
